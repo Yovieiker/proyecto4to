@@ -1,0 +1,1 @@
+export { TwentyFourPxPaslock } from "./TwentyFourPxPaslock";

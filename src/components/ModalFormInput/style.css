@@ -1,0 +1,561 @@
+.modal-form-input {
+  height: 48px;
+}
+
+.modal-form-input .overlap-group {
+  border-radius: 12px;
+  height: 48px;
+  position: relative;
+  width: 85px;
+}
+
+.modal-form-input .text-wrapper {
+  color: #271938;
+  font-family: "Causten Round-SemiBold", Helvetica;
+  font-size: 16px;
+  font-weight: 600;
+  height: 20px;
+  left: 16px;
+  letter-spacing: 0;
+  line-height: 16px;
+  position: absolute;
+  top: 14px;
+  width: 53px;
+}
+
+.modal-form-input .class {
+  height: 24px !important;
+  left: 153px !important;
+  position: absolute !important;
+  top: 5px !important;
+  width: 24px !important;
+}
+
+.modal-form-input .class-2 {
+  height: 24px !important;
+  left: 259px !important;
+  position: absolute !important;
+  top: 5px !important;
+  width: 24px !important;
+}
+
+.modal-form-input .class-3 {
+  height: 24px !important;
+  left: 100px !important;
+  position: absolute !important;
+  top: 5px !important;
+  width: 24px !important;
+}
+
+.modal-form-input .text {
+  color: #271938;
+  font-family: "Causten Round-Light", Helvetica;
+  font-size: 16px;
+  font-weight: 300;
+  height: 20px;
+  left: 0;
+  letter-spacing: 0;
+  line-height: 32px;
+  position: absolute;
+  top: 12px;
+  white-space: nowrap;
+}
+
+.modal-form-input .placeholder {
+  color: #271938;
+  font-family: "Causten Round-Bold", Helvetica;
+  font-size: 12px;
+  font-weight: 700;
+  height: 10px;
+  left: 0;
+  letter-spacing: 0;
+  line-height: 10px;
+  position: absolute;
+  top: 0;
+  white-space: nowrap;
+}
+
+.modal-form-input .group {
+  position: absolute;
+}
+
+.modal-form-input .div-wrapper {
+  background-color: #f6f6f6;
+  border: 0.4px solid;
+  border-color: #df0f41;
+  border-radius: 12px;
+  height: 48px;
+  position: relative;
+  width: 85px;
+}
+
+.modal-form-input .div {
+  font-size: 12px;
+  height: 10px;
+  left: 16px;
+  letter-spacing: 0;
+  line-height: 10px;
+  position: absolute;
+  white-space: nowrap;
+}
+
+.modal-form-input .text-2 {
+  color: #271938;
+  font-family: "Causten Round-Light", Helvetica;
+  font-size: 16px;
+  font-weight: 300;
+  height: 20px;
+  left: 16px;
+  letter-spacing: 0;
+  line-height: 32px;
+  position: absolute;
+  top: 19px;
+  white-space: nowrap;
+}
+
+.modal-form-input .placeholder-2 {
+  color: #271938;
+  font-family: "Causten Round-Bold", Helvetica;
+  font-size: 12px;
+  font-weight: 700;
+  height: 10px;
+  left: 16px;
+  letter-spacing: 0;
+  line-height: 10px;
+  position: absolute;
+  top: 7px;
+  white-space: nowrap;
+}
+
+.modal-form-input .placeholder-3 {
+  color: #df0f41;
+  font-family: "Causten Round-SemiBold", Helvetica;
+  font-size: 12px;
+  font-weight: 600;
+  height: 10px;
+  left: 16px;
+  letter-spacing: 0;
+  line-height: 10px;
+  position: absolute;
+  top: 51px;
+  white-space: nowrap;
+}
+
+.modal-form-input.large {
+  border-radius: 12px;
+  width: 205px;
+}
+
+.modal-form-input.medium {
+  border-radius: 12px;
+  width: 152px;
+}
+
+.modal-form-input.tiny {
+  border-radius: 12px;
+  position: relative;
+  width: 98px;
+}
+
+.modal-form-input.extra-large {
+  border-radius: 12px;
+  width: 311px;
+}
+
+.modal-form-input.error {
+  position: relative;
+}
+
+.modal-form-input.mini {
+  width: 85px;
+}
+
+.modal-form-input.enabled {
+  background-color: #f6f6f6;
+  border-radius: 12px;
+  position: relative;
+}
+
+.modal-form-input.desabled.medium {
+  background-color: #eaeaea;
+}
+
+.modal-form-input.tiny.error {
+  background-color: #f6f6f6;
+  border: 0.4px solid;
+  border-color: #df0f41;
+}
+
+.modal-form-input.desabled.large {
+  background-color: #eaeaea;
+}
+
+.modal-form-input.desabled.extra-large {
+  background-color: #eaeaea;
+}
+
+.modal-form-input.extra-large.error {
+  background-color: #f6f6f6;
+  border: 0.4px solid;
+  border-color: #df0f41;
+}
+
+.modal-form-input.desabled.tiny {
+  background-color: #eaeaea;
+}
+
+.modal-form-input.active.large {
+  background-color: #f6f6f6;
+  position: relative;
+}
+
+.modal-form-input.active.medium {
+  background-color: #f6f6f6;
+  position: relative;
+}
+
+.modal-form-input.active.extra-large {
+  background-color: #f6f6f6;
+  position: relative;
+}
+
+.modal-form-input.active.tiny {
+  background-color: #f6f6f6;
+}
+
+.modal-form-input.large.error {
+  background-color: #f6f6f6;
+  border: 0.4px solid;
+  border-color: #df0f41;
+}
+
+.modal-form-input.medium.error {
+  background-color: #f6f6f6;
+  border: 0.4px solid;
+  border-color: #df0f41;
+}
+
+.modal-form-input.large .placeholder-4 {
+  left: 16px;
+}
+
+.modal-form-input.active .placeholder-4 {
+  height: 48px;
+}
+
+.modal-form-input.medium .placeholder-4 {
+  left: 16px;
+}
+
+.modal-form-input.tiny .placeholder-4 {
+  left: 16px;
+  width: 66px;
+}
+
+.modal-form-input.extra-large .placeholder-4 {
+  left: 16px;
+}
+
+.modal-form-input.error .placeholder-4 {
+  height: 32px;
+}
+
+.modal-form-input.enabled .placeholder-4 {
+  color: #271938;
+  font-family: "Causten Round-SemiBold", Helvetica;
+  font-size: 16px;
+  font-weight: 600;
+  height: 20px;
+  left: 16px;
+  letter-spacing: 0;
+  line-height: 16px;
+  opacity: 0.4;
+  position: absolute;
+  top: 13px;
+}
+
+.modal-form-input.desabled.medium .placeholder-4 {
+  height: 32px;
+  position: relative;
+  top: 7px;
+  width: 124px;
+}
+
+.modal-form-input.desabled.large .placeholder-4 {
+  height: 32px;
+  position: relative;
+  top: 7px;
+  width: 177px;
+}
+
+.modal-form-input.enabled.extra-large .placeholder-4 {
+  width: 263px;
+}
+
+.modal-form-input.desabled.extra-large .placeholder-4 {
+  height: 32px;
+  position: relative;
+  top: 7px;
+  width: 283px;
+}
+
+.modal-form-input.extra-large.error .placeholder-4 {
+  width: 87px;
+}
+
+.modal-form-input.mini.active .placeholder-4 {
+  width: 87px;
+}
+
+.modal-form-input.enabled.medium .placeholder-4 {
+  width: 120px;
+}
+
+.modal-form-input.desabled.tiny .placeholder-4 {
+  height: 32px;
+}
+
+.modal-form-input.active.large .placeholder-4 {
+  width: 87px;
+}
+
+.modal-form-input.enabled.large .placeholder-4 {
+  width: 173px;
+}
+
+.modal-form-input.mini.enabled .placeholder-4 {
+  width: 67px;
+}
+
+.modal-form-input.active.medium .placeholder-4 {
+  width: 87px;
+}
+
+.modal-form-input.mini.desabled .placeholder-4 {
+  height: 48px;
+  width: 87px;
+}
+
+.modal-form-input.active.extra-large .placeholder-4 {
+  width: 87px;
+}
+
+.modal-form-input.mini.error .placeholder-4 {
+  width: 87px;
+}
+
+.modal-form-input.large.error .placeholder-4 {
+  width: 87px;
+}
+
+.modal-form-input.medium.error .placeholder-4 {
+  width: 87px;
+}
+
+.modal-form-input.desabled .overlap-group {
+  background-color: #eaeaea;
+}
+
+.modal-form-input.error .overlap-group {
+  background-color: #f6f6f6;
+}
+
+.modal-form-input.active .overlap-group {
+  background-color: #f6f6f6;
+}
+
+.modal-form-input.enabled .overlap-group {
+  background-color: #f6f6f6;
+}
+
+.modal-form-input.large .text {
+  width: 173px;
+}
+
+.modal-form-input.medium .text {
+  width: 120px;
+}
+
+.modal-form-input.tiny .text {
+  width: 120px;
+}
+
+.modal-form-input.extra-large .text {
+  width: 263px;
+}
+
+.modal-form-input.mini .text {
+  width: 120px;
+}
+
+.modal-form-input.large .placeholder {
+  width: 173px;
+}
+
+.modal-form-input.medium .placeholder {
+  width: 120px;
+}
+
+.modal-form-input.tiny .placeholder {
+  width: 120px;
+}
+
+.modal-form-input.extra-large .placeholder {
+  width: 263px;
+}
+
+.modal-form-input.mini .placeholder {
+  width: 120px;
+}
+
+.modal-form-input.large .group {
+  height: 20px;
+  left: 16px;
+  top: 19px;
+  width: 173px;
+}
+
+.modal-form-input.active .group {
+  color: #271938;
+  font-family: "Causten Round-Light", Helvetica;
+  font-size: 16px;
+  font-weight: 300;
+  letter-spacing: 0;
+  line-height: 32px;
+  white-space: nowrap;
+}
+
+.modal-form-input.medium .group {
+  height: 20px;
+  left: 16px;
+  top: 19px;
+  width: 120px;
+}
+
+.modal-form-input.tiny .group {
+  color: #271938;
+  font-family: "Causten Round-Light", Helvetica;
+  font-size: 16px;
+  font-weight: 300;
+  height: 20px;
+  left: 16px;
+  letter-spacing: 0;
+  line-height: 32px;
+  top: 19px;
+  white-space: nowrap;
+  width: 66px;
+}
+
+.modal-form-input.extra-large .group {
+  height: 20px;
+  left: 16px;
+  top: 19px;
+  width: 263px;
+}
+
+.modal-form-input.mini .group {
+  height: 48px;
+  left: 0;
+  top: 0;
+  width: 87px;
+}
+
+.modal-form-input.large .div {
+  color: #271938;
+  font-family: "Causten Round-Bold", Helvetica;
+  font-weight: 700;
+  top: 7px;
+  width: 173px;
+}
+
+.modal-form-input.medium .div {
+  color: #271938;
+  font-family: "Causten Round-Bold", Helvetica;
+  font-weight: 700;
+  top: 7px;
+  width: 120px;
+}
+
+.modal-form-input.tiny .div {
+  color: #271938;
+  font-family: "Causten Round-Bold", Helvetica;
+  font-weight: 700;
+  top: 7px;
+  width: 66px;
+}
+
+.modal-form-input.extra-large .div {
+  color: #271938;
+  font-family: "Causten Round-Bold", Helvetica;
+  font-weight: 700;
+  top: 7px;
+  width: 263px;
+}
+
+.modal-form-input.mini .div {
+  color: #df0f41;
+  font-family: "Causten Round-SemiBold", Helvetica;
+  font-weight: 600;
+  top: 51px;
+  width: 84px;
+}
+
+.modal-form-input.large .text-2 {
+  width: 173px;
+}
+
+.modal-form-input.medium .text-2 {
+  width: 120px;
+}
+
+.modal-form-input.tiny .text-2 {
+  width: 66px;
+}
+
+.modal-form-input.extra-large .text-2 {
+  width: 263px;
+}
+
+.modal-form-input.mini .text-2 {
+  width: 66px;
+}
+
+.modal-form-input.large .placeholder-2 {
+  width: 173px;
+}
+
+.modal-form-input.medium .placeholder-2 {
+  width: 120px;
+}
+
+.modal-form-input.tiny .placeholder-2 {
+  width: 66px;
+}
+
+.modal-form-input.extra-large .placeholder-2 {
+  width: 263px;
+}
+
+.modal-form-input.mini .placeholder-2 {
+  width: 66px;
+}
+
+.modal-form-input.large .placeholder-3 {
+  width: 189px;
+}
+
+.modal-form-input.medium .placeholder-3 {
+  width: 142px;
+}
+
+.modal-form-input.tiny .placeholder-3 {
+  width: 111px;
+}
+
+.modal-form-input.extra-large .placeholder-3 {
+  width: 295px;
+}
+
+.modal-form-input.mini .placeholder-3 {
+  width: 111px;
+}

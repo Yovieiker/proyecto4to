@@ -11,3 +11,24 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.img {
+  width: 100%;
+  object-fit: cover;
+}
+.textGradient {
+  background: linear-gradient(135deg, #FF0080 0%, #7928CA 100%),
+  linear-gradient(0deg, #C66CDD, #C66CDD);
+  
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@media (min-width: 768px) {
+  .img {
+    width:auto !important;
+    object-fit: cover;
+  }
+  .btnPosition{
+    left: 35% !important
+    }
+}

@@ -4,6 +4,7 @@ import faqData from "./QuestionData";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import React, { useState } from "react";
 import CarouselMarcas from './CarouselMarcas';
+import { NavLink } from 'react-router-dom';
 
 function HomeSectionThree() {
   const [expanded, setExpanded] = useState(false);
@@ -57,7 +58,8 @@ function HomeSectionThree() {
 
           )}
         </Box>
-        <Button
+        <Button  component={NavLink}
+                to="/encuesta"
           sx={{
             marginRight: "10px",
             background: "#B35CCA",
@@ -173,7 +175,8 @@ function HomeSectionThree() {
               color: "#fff"
             },
           }}>Tengo más dudas</Button>
-          <Button
+          <Button  component={NavLink}
+                to="/encuesta"
           sx={{
             marginLeft: "10px",
             background: "#B35CCA",

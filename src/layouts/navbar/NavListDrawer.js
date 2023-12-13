@@ -5,10 +5,10 @@ import {
     ListItemText,
   } from "@mui/material";
   import { Box } from "@mui/system";
-  
+  import { NavLink } from "react-router-dom";
 
   
-  export default function NavListDrawer({navLinks}) {
+  export default function NavListDrawer({navLinks , setOpen}) {
     return (
       <Box sx={{ width: 250 }}>
        
@@ -21,8 +21,9 @@ import {
                 key={item.title}
               >
                 <ListItemButton
-                  component="a"
-                  href={item.path}
+                  component={NavLink}
+                  to={item.path}
+                  onClick={() => setOpen(false)}
                 >
                   <ListItemText  >{item.title}</ListItemText>
                 </ListItemButton>

@@ -38,11 +38,8 @@ function CarouselMarcas() {
           component="img"
           src={marca.imagen}
           alt={marca.nombre}
-          width="150px"
-          height="150px"
-          sx={{
-            objectFit: 'scale-down',
-          }}
+        className='img-carousel'
+          
         />
       </SwiperSlide>
     ));

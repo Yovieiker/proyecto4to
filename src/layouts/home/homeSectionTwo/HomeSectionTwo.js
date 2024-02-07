@@ -1,6 +1,7 @@
 import { Box, Typography, styled, Button } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import darkBlueColor from "../../../helpers/colors";
+import { NavLink } from "react-router-dom";
 const Img = styled("img")({
     width: "80%",
     height: 300,
@@ -147,6 +148,8 @@ function HomeSectionTwo() {
                     </Typography>
                     <Typography mb={10} mt={1} sx={{ fontSize: "22px", fontWeight: 600 }}>de experiencia</Typography>
                     <Button
+                     component={NavLink}
+                     to="/encuesta"
                         sx={{
 
                             background: "#FF167D",
@@ -249,6 +252,8 @@ function HomeSectionTwo() {
                         </Box>
                     </Box>
                     <Button
+                     component={NavLink}
+                     to="/encuesta"
                         sx={{
                             marginTop: "70px",
                             background: "#FF167D",

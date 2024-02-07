@@ -34,7 +34,7 @@ function Footer() {
     return (
         <>
             <Box component="footer">
-                <Box mt={4} sx={{ display: { md: "none" }, height: "130vh", background: "#C66CDD", color: "#fff" }}>
+                <Box  sx={{ display: { md: "none" }, height: "130vh", background: "#C66CDD", color: "#fff" }}>
                     <Box p={4} sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                         <Typography variant="h5">Síguenos en nuestras redes sociales</Typography>
                         <img src='/assets/img/iconSB.png' alt="Sensebox" />
@@ -80,8 +80,8 @@ function Footer() {
                 </Box>
                 {/*DESKTOP*/}
                 
-                <Box mt={2} sx={{ display: { xs: "none", md: "block" }, height: "60vh", background: "#C66CDD", color: "#fff" }}>
-                    <Box pt={10} m={3} sx={{ display: "flex", justifyContent: "center" }}>
+                <Box sx={{ display: { xs: "none", md: "block" }, height: "60vh", background: "#C66CDD", color: "#fff" }}>
+                    <Box pt={10} mx={3} sx={{ display: "flex", justifyContent: "center" }}>
                         <Box>
                             <Typography variant="h5">Contáctanos</Typography>
                             <Typography >Sensebox ofrece la posibilidad de probar <br /> productos mes a mes.</Typography>

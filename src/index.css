@@ -1,9 +1,43 @@
+@font-face {
+  font-family: 'Bergen Sans';
+  src: url('../src/assets/fonts/BergenSans-Bold.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+}
 
 @font-face {
   font-family: 'Bergen Sans';
-  src: url('../src/assets/fonts/BergenSans-Bold.otf');
+  src: url('../src/assets/fonts/BergenSans-BoldItalic.otf') format('opentype');
   font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Bergen Sans';
+  src: url('../src/assets/fonts/BergenSans-Italic.otf') format('opentype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Bergen Sans';
+  src: url('../src/assets/fonts/BergenSans-Regular.otf') format('opentype');
+  font-weight: normal;
   font-style: normal;
+}
+
+@font-face {
+  font-family: 'Bergen Sans';
+  src: url('../src/assets/fonts/BergenSans-SemiBold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Bergen Sans';
+  src: url('../src/assets/fonts/BergenSans-SemiBoldItalic.otf') format('opentype');
+  font-weight: 600;
+  font-style: italic;
 }
 
 body {
@@ -12,16 +46,14 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-
 }
 
 code {
   font-family: 'Bergen Sans', sans-serif;
-
 }
-*{
-  font-family: 'Bergen Sans', sans-serif !important;
 
+* {
+  font-family: 'Bergen Sans', sans-serif !important;
 }
 .img {
   width: 100%;
@@ -67,4 +99,40 @@ code {
   .widthContainerCajas {
     width: 1024px !important ;
   }
+}
+
+.Mui-checked + .MuiFormControlLabel-label > .encuesta-Label > img {
+  border: 3px solid #C66CDD;
+  background-color: rgba(255, 255, 255, 0.5); /* Cambia el valor de transparencia (0.5) según tus necesidades */
+  opacity: 0.5; /* Cambia el valor de opacidad (0.8) según tus necesidades */
+  position: relative;
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.img-carousel {
+  width: 150px !important;
+  height: 150px !important;
+  object-fit: scale-down !important;
+
 }

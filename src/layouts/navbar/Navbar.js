@@ -6,6 +6,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import LogoutIcon from '@mui/icons-material/Logout';
 import HeadsetMicIcon from '@mui/icons-material/HeadsetMic';
 import SearchIcon from '@mui/icons-material/Search';
+import { NavLink } from 'react-router-dom';
 function Navbar() {
   const [open, setOpen] = useState(false)
   const navLinks = [
@@ -29,15 +30,15 @@ function Navbar() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" component="a" href='#' sx={{ 
+          <Typography variant="h6" component={NavLink} to='/' sx={{ 
             textDecoration: "none", color: "#fff",
             flexGrow: 1
           }}><Typography variant="h6" component="span" sx={{ fontWeight: 700 }}>sense</Typography>box</Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {
               navLinks.map(item => (
-                <Button color="inherit" key={item.title} component="a"
-                  href={item.path}
+                <Button color="inherit" key={item.title} component={NavLink}
+                  to={item.path}
                 >{item.title}</Button>
 
               ))
@@ -66,7 +67,7 @@ function Navbar() {
         anchor="left"
         onClose={() => setOpen(false)}
         sx={{ display: { sm: "none" } }} >
-        <NavListDrawer navLinks={navLinks} />
+        <NavListDrawer navLinks={navLinks} setOpen={setOpen} />
       </Drawer>
 
     </>

@@ -6,7 +6,28 @@ import BreadcrumbsWeb from "../../components/breadcrumbs/BreadcrumbsWeb";
 function EncuestaParteWebFinal({ onNext, paso, barraProgress }) {
   const handleNext = () => {
     onNext();
+    // const encuestaData = JSON.parse(localStorage.getItem('encuestaData'));
+    // const idUsuario = localStorage.getItem('idUser');
+    // // Realizar la petición para enviar los datos al servidor
+    // fetch(`http://localhost:4000/api/encuesta/${idUsuario}`, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(encuestaData)
+    // })
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     // Manejar la respuesta del servidor
+    //     console.log(data); // Puedes hacer algo con la respuesta, como mostrar un mensaje de éxito
+    //   })
+    //   .catch(error => {
+    //     console.error('Error al enviar la encuesta:', error);
+    //     // Puedes mostrar un mensaje de error o realizar alguna acción adicional en caso de error
+    //   });
   };
+
+ 
   return (
     <>
     <BreadcrumbsWeb valor={true}   />

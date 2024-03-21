@@ -33,6 +33,8 @@ function Encuesta() {
         const data = await response.json();
         setQuestions(data.items);
         console.log("Datos de la API:", data.items);
+        
+
       } catch (error) {
         console.error("Error al obtener los datos de la API:", error);
       }
@@ -40,6 +42,9 @@ function Encuesta() {
 
     fetchData();
   }, []);
+
+  
+    
 
   const handleNextPart = () => {
     setCurrentPart(currentPart + 1);

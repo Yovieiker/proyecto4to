@@ -9,7 +9,7 @@ function EncuestaProduct({ onNext, onSkip, onBackHome }) {
 
 
   const [productos, setProductos] = useState([]);
-
+ const [selectedProduct, setSelectedProduct] = useState(null);
   useEffect(() => {
     // Fetch data from the API
     const fetchData = async () => {
@@ -34,6 +34,10 @@ function EncuestaProduct({ onNext, onSkip, onBackHome }) {
 
     fetchData();
   }, []);
+
+const handleSelection = (id) => {
+  setSelectedProduct(id);
+};
 
   return (
     <> 
@@ -60,6 +64,7 @@ function EncuestaProduct({ onNext, onSkip, onBackHome }) {
                       <Grid item xs={6} key={respuestaIndex}>
                         <FormControlLabel className="encuesta-FormControlLabel"
                           value={respuesta?.id}
+                        onChange={() => handleSelection(respuesta.id)}
                           control={
                             <Radio style={{ display: "none" }} />
 

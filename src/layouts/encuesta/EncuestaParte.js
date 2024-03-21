@@ -11,7 +11,7 @@ import {
   FormLabel,
   Checkbox,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
@@ -26,7 +26,50 @@ function EncuestaParte({ questions, onBack, onNext, paso, barraProgress,mostrarT
     onNext();
   };
 
+  const [data, setData] = useState([]);
 
+useEffect(() => {
+  // Obtener el arreglo existente del localStorage (si existe)
+  const existingData = localStorage.getItem("encuestaData");
+
+  // Si existe un arreglo en el localStorage, conviértelo de JSON a objeto
+  if (existingData) {
+    setData(JSON.parse(existingData));
+  }
+}, []);
+const handleResponseSelection = ( preguntaId, preguntaTitulo,respuestaSeleccionada, respuestaTitulo) => {
+  // Agregar la pregunta y respuesta seleccionadas a la variable data
+  const newData = [...data, { preguntaId, preguntaTitulo, respuestaSeleccionada, respuestaTitulo }];
+  setData(newData);
+
+  // Actualizar el arreglo en el localStorage
+  localStorage.setItem("encuestaData", JSON.stringify(newData));
+};
+
+const handleSendData = () => {
+    
+  const encuestaData = JSON.parse(localStorage.getItem('encuestaData'));
+  const idUsuario = localStorage.getItem('idUser');
+  // Realizar la petición para enviar los datos al servidor
+  fetch(`http://localhost:4000/api/encuesta/${idUsuario}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(encuestaData)
+  })
+    .then(response => response.json())
+    .then(data => {
+      // Manejar la respuesta del servidor
+      console.log(data); // Puedes hacer algo con la respuesta, como mostrar un mensaje de éxito
+    })
+    .catch(error => {
+      console.error('Error al enviar la encuesta:', error);
+      // Puedes mostrar un mensaje de error o realizar alguna acción adicional en caso de error
+    });
+
+    onNext();
+}
   return (
     <>
       <Box pb={4} sx={{ background: "#f0cfe6", textAlign: "center" , display: { md: "none" }}}>
@@ -87,6 +130,12 @@ function EncuestaParte({ questions, onBack, onNext, paso, barraProgress,mostrarT
                         <Grid item xs={4} key={respuestaIndex}>
                           <FormControlLabel className="encuesta-FormControlLabel"
                             value={respuesta?.respuesta_pregunta_id}
+                            onChange={() => handleResponseSelection(
+                              question.pregunta_id,
+                              question.pregunta,
+                              respuesta.respuesta_pregunta_id,
+                              respuesta.respuesta
+                            )}
                             control={
                               question.multiple !== true ? <Radio style={{ display: "none" }} /> : <Checkbox style={{ display: "none" }} />
 
@@ -126,7 +175,7 @@ function EncuestaParte({ questions, onBack, onNext, paso, barraProgress,mostrarT
               <ArrowBackIcon />
             </IconButton>
 
-            <IconButton sx={{ border: "1px solid #C66CDD", color: "#C66CDD" }} onClick={handleNext}>
+            <IconButton sx={{ border: "1px solid #C66CDD", color: "#C66CDD" }} onClick={ paso === 5 ? handleSendData : handleNext}>
               <ArrowForwardIcon />
             </IconButton>
           </Box>

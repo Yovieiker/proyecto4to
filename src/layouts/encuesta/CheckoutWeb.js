@@ -16,10 +16,10 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
+import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
 import BreadcrumbsWeb from "../../components/breadcrumbs/BreadcrumbsWeb";
-import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
-import PaymentsIcon from '@mui/icons-material/Payments';
+import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
+import PaymentsIcon from "@mui/icons-material/Payments";
 function CheckoutWeb() {
   const [departamentos, setDepartamentos] = useState([]);
   const [ciudades, setCiudades] = useState([]);
@@ -28,6 +28,15 @@ function CheckoutWeb() {
   const [showContactInfo, setShowContactInfo] = useState(true);
   const [showPaymentMethod, setShowPaymentMethod] = useState(false);
   const [buttonText, setButtonText] = useState("Siguiente");
+  const [userData, setUserData] = useState([]);
+  const [montoEnvio, setMontoEnvio] = useState(0);
+  const [cedula, setCedula] = useState("");
+  const [telefono, setTelefono] = useState("");
+  const [ciudad, setCiudad] = useState("");
+  const [direccion, setDireccion] = useState("");
+  const precioCaja = 55900;
+  const idUsuario = parseInt(localStorage.getItem("idUser"));
+
   useEffect(() => {
     const fetchDepartamentos = async () => {
       try {
@@ -52,6 +61,7 @@ function CheckoutWeb() {
           const response = await fetch(url);
           const data = await response.json();
           setCiudades(data);
+          console.log(data);
         } else {
           setCiudades([]);
         }
@@ -63,6 +73,21 @@ function CheckoutWeb() {
     fetchCiudades();
   }, [departamentoSeleccionado]);
 
+  useEffect(() => {
+    const getUsuario = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:4000/api/users/${idUsuario}`
+        );
+        const dataUser = await response.json();
+        setUserData(dataUser);
+      } catch (error) {
+        console.error("Error al obtener los datos del usuario:", error);
+      }
+    };
+    getUsuario();
+  }, []);
+
   const handleDepartamentoSeleccionado = (event) => {
     const selectedDepartamento = event.target.value;
     const departamento = departamentos.find(
@@ -71,34 +96,83 @@ function CheckoutWeb() {
 
     if (departamento) {
       setDepartamentoSeleccionado(departamento.departamento);
+      console.log(departamento.departamento);
     } else {
       setDepartamentoSeleccionado("");
     }
+  };
+  const handlePrecioEnvio = (precio, ciudad) => {
+    // Reemplazar "." por "," para separar miles
+    const precioConMiles = precio.replace(".", ",");
+
+    // Convertir el string a número
+    const monto = parseFloat(precioConMiles);
+
+    // Multiplicar por 1000 para obtener el valor en pesos
+    const montoEnPesos = monto * 1000;
+
+    setMontoEnvio(montoEnPesos);
+
+    setCiudad(ciudad);
   };
 
   const handleMetodoPago = (event) => {
     setMetodoPago(event.target.value);
   };
+
+  const handleCheckout = async (data) => {
+    try {
+      const response = await fetch("http://localhost:4000/api/checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Datos de la compra:", data);
+      } else {
+        console.error("Error en la petición de checkout:", response.status);
+      }
+    } catch (error) {
+      console.error("Error en la petición de checkout:", error);
+    }
+  };
+
   const handleNextClick = () => {
     if (!showPaymentMethod) {
       setShowContactInfo(false);
       setShowPaymentMethod(true);
       setButtonText("Comprar");
     } else {
-      // por ejemplo, usando window.location.href = "URL_DE_LA_PASARELA"
+      const data = {
+        id_usuario: idUsuario,
+        total: precioCaja,
+        cedula: cedula,
+        telefono: telefono,
+        departamento: departamentoSeleccionado,
+        ciudad: ciudad,
+        direccion: direccion,
+        metodo_pago: metodoPago,
+      };
+      console.log("Datos de la compra:", data);
+      handleCheckout(data);
     }
   };
 
-  const handleBackClick=()=>{
+  const handleBackClick = () => {
     if (!showContactInfo) {
       setShowContactInfo(true);
       setShowPaymentMethod(false);
       setButtonText("Siguiente");
     }
-  }
+  };
+
   return (
-    <> 
-    <BreadcrumbsWeb valor={true}   />
+    <>
+      <BreadcrumbsWeb valor={true} />
 
       <Box
         p={3}
@@ -107,9 +181,9 @@ function CheckoutWeb() {
             "linear-gradient(0deg, #f0689a 0%, #f0689a 50%, #903763 100%)",
         }}
       >
-        <Paper sx={{ padding: "24px", borderRadius:"20px" }}>
+        <Paper sx={{ padding: "24px", borderRadius: "20px" }}>
           <Box px={2} pb={2} sx={{ display: "flex" }}>
-            <Box sx={{display:"flex"}}>
+            <Box sx={{ display: "flex" }}>
               <IconButton onClick={handleBackClick}>
                 <ArrowBackOutlinedIcon />
               </IconButton>
@@ -126,11 +200,7 @@ function CheckoutWeb() {
                 <Link underline="hover" color="#C66CDD" href="/">
                   HomePage
                 </Link>
-                <Link
-                  underline="hover"
-                  color="#C66CDD"
-                  href="/"
-                >
+                <Link underline="hover" color="#C66CDD" href="/">
                   CajaSorpresa
                 </Link>
                 <Link
@@ -170,46 +240,54 @@ function CheckoutWeb() {
                     <Box sx={{ display: "flex" }}>
                       <Box width={340}>
                         <Typography>Nombre</Typography>
-                        <TextField color="secondary"
+                        <TextField
+                          color="secondary"
                           sx={{ marginBottom: 2 }}
                           size="small"
                           fullWidth
                           id="name"
                           label="Nombre"
                           variant="outlined"
-                          
+                          value={userData.nombre}
                         />
                         <Typography>email</Typography>
-                        <TextField color="secondary"
+                        <TextField
+                          color="secondary"
                           sx={{ marginBottom: 2 }}
                           size="small"
                           fullWidth
                           id="email"
                           label="Correo"
                           variant="outlined"
+                          value={userData.email}
                         />
                         <Typography>Identificación</Typography>
-                        <TextField color="secondary"
+                        <TextField
+                          color="secondary"
                           sx={{ marginBottom: 2 }}
                           size="small"
                           fullWidth
                           id="dni"
                           label="Identificación"
                           variant="outlined"
+                          onChange={(e) => setCedula(e.target.value)}
                         />
                       </Box>
                       <Box ml={5} width={340}>
                         <Typography>Apellido</Typography>
-                        <TextField color="secondary"
+                        <TextField
+                          color="secondary"
                           sx={{ marginBottom: 2 }}
                           size="small"
                           fullWidth
                           id="apellido"
                           label="apellido"
                           variant="outlined"
+                          value={userData.apellido}
                         />
                         <Typography>Contraseña</Typography>
-                        <TextField color="secondary"
+                        <TextField
+                          color="secondary"
                           sx={{ marginBottom: 2 }}
                           size="small"
                           fullWidth
@@ -219,13 +297,15 @@ function CheckoutWeb() {
                           autoComplete="current-password"
                         />
                         <Typography>Teléfono</Typography>
-                        <TextField color="secondary"
+                        <TextField
+                          color="secondary"
                           sx={{ marginBottom: 2 }}
                           size="small"
                           fullWidth
                           id="mobile"
                           label="Teléfono"
                           variant="outlined"
+                          onChange={(e) => setTelefono(e.target.value)}
                         />
                       </Box>
                     </Box>
@@ -245,7 +325,8 @@ function CheckoutWeb() {
                       <Box width={120}>
                         <Typography>Direccion</Typography>
 
-                        <TextField color="secondary"
+                        <TextField
+                          color="secondary"
                           sx={{ marginBottom: 2 }}
                           size="small"
                           fullWidth
@@ -270,7 +351,8 @@ function CheckoutWeb() {
                       <Box mx={3} width={167}>
                         <Typography>Direccion</Typography>
 
-                        <TextField color="secondary"
+                        <TextField
+                          color="secondary"
                           sx={{ marginBottom: 2 }}
                           size="small"
                           fullWidth
@@ -279,12 +361,14 @@ function CheckoutWeb() {
                           label="Ciudad"
                           disabled={!departamentoSeleccionado}
                           value={ciudades.nombre}
-                          onChange={() => { }}
                         >
                           {ciudades.map((ciudad) => (
                             <MenuItem
                               key={ciudad.ciudad_id}
                               value={ciudad.nombre}
+                              onClick={() =>
+                                handlePrecioEnvio(ciudad.precio, ciudad.nombre)
+                              }
                             >
                               {ciudad.nombre}
                             </MenuItem>
@@ -293,18 +377,21 @@ function CheckoutWeb() {
                       </Box>
                       <Box>
                         <Typography>Direccion</Typography>
-                        <TextField color="secondary"
+                        <TextField
+                          color="secondary"
                           sx={{ marginBottom: 2 }}
                           size="small"
                           fullWidth
                           id="direccion"
                           label="direccion"
                           variant="outlined"
+                          onChange={(e) => setDireccion(e.target.value)}
                         />
                       </Box>
                       <Box ml={3} width={142}>
                         <Typography>Complemento</Typography>
-                        <TextField color="secondary"
+                        <TextField
+                          color="secondary"
                           sx={{ marginBottom: 2 }}
                           size="small"
                           id="indicaciones"
@@ -357,10 +444,12 @@ function CheckoutWeb() {
                           }
                           label={
                             <>
-                            <Box sx={{display:"flex"}}>
-                              <PaymentsIcon />
-                              <Typography ml={1}>Tarjeta de debito o credito</Typography>
-                            </Box>
+                              <Box sx={{ display: "flex" }}>
+                                <PaymentsIcon />
+                                <Typography ml={1}>
+                                  Tarjeta de debito o credito
+                                </Typography>
+                              </Box>
                             </>
                           }
                           sx={{
@@ -384,10 +473,10 @@ function CheckoutWeb() {
                           }
                           label={
                             <>
-                            <Box sx={{display:"flex"}}>
-                              <AccountBalanceIcon />
-                              <Typography ml={1}>Cuenta de ahorro</Typography>
-                            </Box>
+                              <Box sx={{ display: "flex" }}>
+                                <AccountBalanceIcon />
+                                <Typography ml={1}>Cuenta de ahorro</Typography>
+                              </Box>
                             </>
                           }
                           sx={{
@@ -474,7 +563,6 @@ function CheckoutWeb() {
                       />{" "}
                     </FormGroup>
                   </Box>
-
                 </Box>
               )}
               <Box
@@ -529,8 +617,8 @@ function CheckoutWeb() {
                         justifyContent: "space-between",
                       }}
                     >
-                      <Typography>Total de la compra </Typography>
-                      <Typography>55.900 COP </Typography>
+                      <Typography>subtotal </Typography>
+                      <Typography>{precioCaja - montoEnvio} COP </Typography>
                     </Box>
                     <Box
                       sx={{
@@ -540,7 +628,7 @@ function CheckoutWeb() {
                       }}
                     >
                       <Typography>costo de envio</Typography>
-                      <Typography>60000</Typography>
+                      <Typography>{montoEnvio}</Typography>
                     </Box>
                   </Box>
                   <Box
@@ -552,17 +640,17 @@ function CheckoutWeb() {
                     }}
                   >
                     <Typography>Total</Typography>
-                    <Typography>60000</Typography>
+                    <Typography>{precioCaja}</Typography>
                   </Box>
                 </Box>
               </Box>
             </Box>
 
-            <Box  sx={{ display: "flex" }}>
-              <Button 
+            <Box sx={{ display: "flex" }}>
+              <Button
                 onClick={handleNextClick}
                 sx={{
-                  marginLeft:3,
+                  marginLeft: 3,
                   height: 64,
                   marginTop: 2,
                   marginBottom: 4,

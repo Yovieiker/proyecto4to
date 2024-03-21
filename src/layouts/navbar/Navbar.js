@@ -1,64 +1,132 @@
-import { AppBar, Box, Button, Drawer, IconButton, Toolbar, Typography } from '@mui/material'
-import React, { useState } from 'react'
-import NavListDrawer from './NavListDrawer'
+import {
+  AppBar,
+  Box,
+  Button,
+  Drawer,
+  IconButton,
+  Toolbar,
+  Typography,
+} from "@mui/material";
+import React, { useState } from "react";
+import NavListDrawer from "./NavListDrawer";
 import MenuIcon from "@mui/icons-material/Menu";
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import LogoutIcon from '@mui/icons-material/Logout';
-import HeadsetMicIcon from '@mui/icons-material/HeadsetMic';
-import SearchIcon from '@mui/icons-material/Search';
-import { NavLink } from 'react-router-dom';
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import LogoutIcon from "@mui/icons-material/Logout";
+import HeadsetMicIcon from "@mui/icons-material/HeadsetMic";
+import SearchIcon from "@mui/icons-material/Search";
+import { NavLink, useNavigate } from "react-router-dom";
 function Navbar() {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
   const navLinks = [
     {
-      title: "Inicio", path: "/"
+      title: "Inicio",
+      path: "/",
     },
     {
-      title: "Blog", path: "/blog"
+      title: "Blog",
+      path: "/blog",
     },
     {
-      title: "Nosotras", path: "/nosotras"
-    }
+      title: "Nosotras",
+      path: "/nosotras",
+    },
+  ];
 
-  ]
+  const handleLogout = () => {
+    // Eliminar el token de autenticación almacenado en el cliente
+    localStorage.removeItem("token");
+    localStorage.removeItem("idUser");
+    localStorage.removeItem("encuestaData");
+    // Redirigir al usuario a la página de inicio de sesión o cualquier otra página deseada
+    navigate("/");
+  };
   return (
     <>
       <AppBar position="static" sx={{ backgroundColor: "#B35CCA" }}>
         <Toolbar>
-          <IconButton color="inherit" size="large" onClick={() => setOpen(true)}
+          <IconButton
+            color="inherit"
+            size="large"
+            onClick={() => setOpen(true)}
             sx={{ display: { sm: "none" } }}
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" component={NavLink} to='/' sx={{ 
-            textDecoration: "none", color: "#fff",
-            flexGrow: 1
-          }}><Typography variant="h6" component="span" sx={{ fontWeight: 700 }}>sense</Typography>box</Typography>
+          <Typography
+            variant="h6"
+            component={NavLink}
+            to="/"
+            sx={{
+              textDecoration: "none",
+              color: "#fff",
+              flexGrow: 1,
+            }}
+          >
+            <Typography variant="h6" component="span" sx={{ fontWeight: 700 }}>
+              sense
+            </Typography>
+            box
+          </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
-            {
-              navLinks.map(item => (
-                <Button color="inherit" key={item.title} component={NavLink}
-                  to={item.path}
-                >{item.title}</Button>
-
-              ))
-            }
+            {navLinks.map((item) => (
+              <Button
+                color="inherit"
+                key={item.title}
+                component={NavLink}
+                to={item.path}
+              >
+                {item.title}
+              </Button>
+            ))}
           </Box>
           <IconButton sx={{ backgroundColor: "#fff", color: "#000" }}>
             <ShoppingCartIcon fontSize="small" />
-          </IconButton >
-          <IconButton sx={{ display: { xs: "grid", sm: "none" },  backgroundColor: "#fff", color: "#000", marginLeft:1 }}>
+          </IconButton>
+          <IconButton
+            sx={{
+              display: { xs: "grid", sm: "none" },
+              backgroundColor: "#fff",
+              color: "#000",
+              marginLeft: 1,
+            }}
+          >
             <LogoutIcon fontSize="small" />
           </IconButton>
-          <Button  sx={{ display: { xs: "none", sm: "block" },width:"110px", marginLeft:1 , backgroundColor: "#8F559E", color: "#fff", borderRadius:"20px" }}>Salir
+          <Button
+            onClick={handleLogout}
+            sx={{
+              display: { xs: "none", sm: "block" },
+              width: "110px",
+              marginLeft: 1,
+              backgroundColor: "#8F559E",
+              color: "#fff",
+              borderRadius: "20px",
+            }}
+          >
+            Salir
           </Button>
-          <IconButton sx={{ display: { xs: "none", sm: "grid" },  backgroundColor: "#fff", color: "#000", marginLeft:1 }}>
+          <IconButton
+            sx={{
+              display: { xs: "none", sm: "grid" },
+              backgroundColor: "#fff",
+              color: "#000",
+              marginLeft: 1,
+            }}
+          >
             <SearchIcon fontSize="small" />
           </IconButton>
 
-          <IconButton sx={{ display: { xs: "none", sm: "grid" },  backgroundColor: "#fff", color: "#000", marginLeft:1 }}>
+          <IconButton
+            sx={{
+              display: { xs: "none", sm: "grid" },
+              backgroundColor: "#fff",
+              color: "#000",
+              marginLeft: 1,
+            }}
+          >
             <HeadsetMicIcon fontSize="small" />
-          </IconButton> 
+          </IconButton>
         </Toolbar>
       </AppBar>
 
@@ -66,12 +134,12 @@ function Navbar() {
         open={open}
         anchor="left"
         onClose={() => setOpen(false)}
-        sx={{ display: { sm: "none" } }} >
+        sx={{ display: { sm: "none" } }}
+      >
         <NavListDrawer navLinks={navLinks} setOpen={setOpen} />
       </Drawer>
-
     </>
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;

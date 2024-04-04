@@ -107,6 +107,31 @@ function SignIn() {
       console.error("Error en la petición de registro:", error);
     }
   };
+  const handleNombre = (e) => {
+    const inputValue = e.target.value;
+    // Restablecer el estado a una cadena vacía al borrar
+    if (inputValue === "") {
+      setNombre("");
+      return;
+    }
+    // Permitir solo letras, espacios y algunos símbolos
+    if (/^[^0-9]+$/.test(inputValue)) {
+      setNombre(inputValue);
+    }
+  };
+
+  const handleApellido = (e) => {
+    const inputValue = e.target.value;
+    // Restablecer el estado a una cadena vacía al borrar
+    if (inputValue === "") {
+      setApellido("");
+      return;
+    }
+    // Permitir solo letras, espacios y algunos símbolos
+    if (/^[^0-9]+$/.test(inputValue)) {
+      setApellido(inputValue);
+    }
+  };
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
@@ -124,7 +149,7 @@ function SignIn() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign up
+              Registrarse
             </Typography>
             <Box
               component="form"
@@ -140,9 +165,10 @@ function SignIn() {
                     required
                     fullWidth
                     id="firstName"
-                    label="First Name"
+                    label="Nombre"
                     autoFocus
-                    onChange={(e) => setNombre(e.target.value)}
+                    value={nombre}
+                    onChange={handleNombre}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -150,10 +176,11 @@ function SignIn() {
                     required
                     fullWidth
                     id="lastName"
-                    label="Last Name"
+                    label="Apellido"
                     name="lastName"
+                    value={apellido}
                     autoComplete="family-name"
-                    onChange={(e) => setApellido(e.target.value)}
+                    onChange={handleApellido}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -161,7 +188,7 @@ function SignIn() {
                     required
                     fullWidth
                     id="email"
-                    label="Email Address"
+                    label="Correo"
                     name="email"
                     autoComplete="email"
                     onChange={(e) => setEmail(e.target.value)}
@@ -172,7 +199,7 @@ function SignIn() {
                     required
                     fullWidth
                     name="password"
-                    label="Password"
+                    label="Contraseña"
                     type="password"
                     id="password"
                     autoComplete="new-password"
@@ -184,7 +211,7 @@ function SignIn() {
                     control={
                       <Checkbox value="allowExtraEmails" color="primary" />
                     }
-                    label="I want to receive inspiration, marketing promotions and updates via email."
+                    label="Acepto terminos y condiciones"
                   />
                 </Grid>
               </Grid>
@@ -194,12 +221,12 @@ function SignIn() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Sign Up
+                Registrarse
               </Button>
               <Grid container justifyContent="flex-end">
                 <Grid item>
                   <Link onClick={registroUsuario} href="#" variant="body2">
-                    Already have an account? Sign in
+                    Ya estas registrado? Iniciar sesion
                   </Link>
                 </Grid>
               </Grid>
@@ -218,7 +245,7 @@ function SignIn() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign in
+              Iniciar sesion
             </Typography>
             <Box
               component="form"
@@ -231,7 +258,7 @@ function SignIn() {
                 required
                 fullWidth
                 id="email"
-                label="Email Address"
+                label="Correo"
                 name="email"
                 autoComplete="email"
                 value={email}
@@ -243,7 +270,7 @@ function SignIn() {
                 required
                 fullWidth
                 name="password"
-                label="Password"
+                label="Contraseña"
                 type="password"
                 id="password"
                 value={contraseña}
@@ -252,7 +279,7 @@ function SignIn() {
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
+                label="Recordar"
               />
               <Button
                 type="submit"
@@ -260,17 +287,17 @@ function SignIn() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Sign In
+                Iniciar sesion
               </Button>
               <Grid container>
                 <Grid item xs>
                   <Link href="#" variant="body2">
-                    Forgot password?
+                    Olvido de contraseña
                   </Link>
                 </Grid>
                 <Grid item>
                   <Link onClick={registroUsuario} href="#" variant="body2">
-                    {"Don't have an account? Sign Up"}
+                    {"No estas registrado? Registrate"}
                   </Link>
                 </Grid>
               </Grid>

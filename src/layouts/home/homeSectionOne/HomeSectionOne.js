@@ -37,7 +37,6 @@ function HomeSectionOne() {
               </Link>
             </SwiperSlide>
           </Swiper>
-        
         </Box>
 
         <Box px={6} sx={{ textAlign: "center" }}>
@@ -58,13 +57,13 @@ function HomeSectionOne() {
               sx={{ fontWeight: 700, py: 5 }}
             >
               {" "}
-              55.900 COP Mensual
+              55.900 BS Mensual
             </Typography>
           </Box>
           <Box mb={4} sx={{ position: "relative" }}>
-            <Button  
-                component={NavLink}
-                to="/encuesta"
+            <Button
+              component={NavLink}
+              to="/encuesta"
               className="btnPosition"
               sx={{
                 position: "absolute",
@@ -99,7 +98,7 @@ function HomeSectionOne() {
             color: "#fff",
             display: "flex",
             height: "745px",
-            width: "1435px",
+            width: "auto",
           }}
         >
           {/* <Box pl={6}>
@@ -173,7 +172,7 @@ function HomeSectionOne() {
                 sx={{ fontWeight: 700, py: 5 }}
               >
                 {" "}
-                55.900 COP Mensual
+                55.900 BS Mensual
               </Typography>
               <Button
                 component={NavLink}

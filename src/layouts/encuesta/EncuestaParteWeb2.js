@@ -183,7 +183,7 @@ function EncuestaParteWeb2({
                 sx={{ display: "flex", justifyContent: "space-around" }}
               >
                 <Button
-                  onClick={paso === 9 ? handleSendData : handleNext}
+                  onClick={handleBack}
                   sx={{
                     color: "#C66CDD",
                     borderRadius: "20px",
@@ -195,7 +195,7 @@ function EncuestaParteWeb2({
                 </Button>
 
                 <Button
-                  onClick={handleNext}
+                  onClick={paso === 9 ? handleSendData : handleNext}
                   sx={{
                     color: "#C66CDD",
                     borderRadius: "20px",

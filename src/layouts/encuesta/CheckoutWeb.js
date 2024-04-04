@@ -20,6 +20,18 @@ import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
 import BreadcrumbsWeb from "../../components/breadcrumbs/BreadcrumbsWeb";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import PaymentsIcon from "@mui/icons-material/Payments";
+import Modal from "@mui/material/Modal";
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "996px",
+  bgcolor: "background.paper",
+  boxShadow: 24,
+  display: "flex",
+  borderRadius: "24px ",
+};
 function CheckoutWeb() {
   const [departamentos, setDepartamentos] = useState([]);
   const [ciudades, setCiudades] = useState([]);
@@ -34,9 +46,16 @@ function CheckoutWeb() {
   const [telefono, setTelefono] = useState("");
   const [ciudad, setCiudad] = useState("");
   const [direccion, setDireccion] = useState("");
+  const [edad, setEdad] = useState(0);
+  const [open, setOpen] = useState(false);
+
   const precioCaja = 55900;
   const idUsuario = parseInt(localStorage.getItem("idUser"));
-
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => {
+    setOpen(false);
+    window.location.href = "/";
+  };
   useEffect(() => {
     const fetchDepartamentos = async () => {
       try {
@@ -156,9 +175,11 @@ function CheckoutWeb() {
         ciudad: ciudad,
         direccion: direccion,
         metodo_pago: metodoPago,
+        edad: edad,
       };
       console.log("Datos de la compra:", data);
       handleCheckout(data);
+      handleOpen();
     }
   };
 
@@ -169,7 +190,20 @@ function CheckoutWeb() {
       setButtonText("Siguiente");
     }
   };
-
+  const handleCedulaChange = (e) => {
+    const inputValue = e.target.value;
+    // Validar que solo se ingresen números en el campo de identificación
+    if (/^\d*$/.test(inputValue)) {
+      setCedula(inputValue);
+    }
+  };
+  const handletelefonoChange = (e) => {
+    const inputValue = e.target.value;
+    // Validar que solo se ingresen números en el campo de telefono
+    if (/^\d*$/.test(inputValue)) {
+      setTelefono(inputValue);
+    }
+  };
   return (
     <>
       <BreadcrumbsWeb valor={true} />
@@ -239,6 +273,19 @@ function CheckoutWeb() {
                   <Box>
                     <Box sx={{ display: "flex" }}>
                       <Box width={340}>
+                        <Typography>Identificación</Typography>
+                        <TextField
+                          color="secondary"
+                          sx={{ marginBottom: 2 }}
+                          size="small"
+                          fullWidth
+                          id="dni"
+                          variant="outlined"
+                          inputMode="numeric"
+                          pattern="[0-9]*"
+                          value={cedula}
+                          onChange={handleCedulaChange}
+                        />
                         <Typography>Nombre</Typography>
                         <TextField
                           color="secondary"
@@ -246,7 +293,6 @@ function CheckoutWeb() {
                           size="small"
                           fullWidth
                           id="name"
-                          label="Nombre"
                           variant="outlined"
                           value={userData.nombre}
                         />
@@ -257,20 +303,8 @@ function CheckoutWeb() {
                           size="small"
                           fullWidth
                           id="email"
-                          label="Correo"
                           variant="outlined"
                           value={userData.email}
-                        />
-                        <Typography>Identificación</Typography>
-                        <TextField
-                          color="secondary"
-                          sx={{ marginBottom: 2 }}
-                          size="small"
-                          fullWidth
-                          id="dni"
-                          label="Identificación"
-                          variant="outlined"
-                          onChange={(e) => setCedula(e.target.value)}
                         />
                       </Box>
                       <Box ml={5} width={340}>
@@ -281,20 +315,19 @@ function CheckoutWeb() {
                           size="small"
                           fullWidth
                           id="apellido"
-                          label="apellido"
                           variant="outlined"
                           value={userData.apellido}
                         />
-                        <Typography>Contraseña</Typography>
+                        <Typography>Edad</Typography>
                         <TextField
                           color="secondary"
                           sx={{ marginBottom: 2 }}
                           size="small"
                           fullWidth
-                          id="outlined-password-input"
-                          label="Password"
-                          type="password"
-                          autoComplete="current-password"
+                          id="edad"
+                          label="edad"
+                          type="number"
+                          onChange={(e) => setEdad(e.target.value)}
                         />
                         <Typography>Teléfono</Typography>
                         <TextField
@@ -305,7 +338,8 @@ function CheckoutWeb() {
                           id="mobile"
                           label="Teléfono"
                           variant="outlined"
-                          onChange={(e) => setTelefono(e.target.value)}
+                          value={telefono}
+                          onChange={handletelefonoChange}
                         />
                       </Box>
                     </Box>
@@ -323,7 +357,7 @@ function CheckoutWeb() {
                     </Typography>
                     <Box sx={{ display: "flex" }}>
                       <Box width={120}>
-                        <Typography>Direccion</Typography>
+                        <Typography>Estado</Typography>
 
                         <TextField
                           color="secondary"
@@ -336,7 +370,7 @@ function CheckoutWeb() {
                           value={departamentoSeleccionado}
                           onChange={handleDepartamentoSeleccionado}
                         >
-                          <MenuItem value="">Seleccionar departamento</MenuItem>
+                          <MenuItem value="">Seleccionar estado</MenuItem>
                           {departamentos.map((departamento) => (
                             <MenuItem
                               key={departamento.departamento}
@@ -349,7 +383,7 @@ function CheckoutWeb() {
                       </Box>
 
                       <Box mx={3} width={167}>
-                        <Typography>Direccion</Typography>
+                        <Typography>Ciudad</Typography>
 
                         <TextField
                           color="secondary"
@@ -389,7 +423,7 @@ function CheckoutWeb() {
                         />
                       </Box>
                       <Box ml={3} width={142}>
-                        <Typography>Complemento</Typography>
+                        <Typography>Punto de referencia</Typography>
                         <TextField
                           color="secondary"
                           sx={{ marginBottom: 2 }}
@@ -596,7 +630,7 @@ function CheckoutWeb() {
                   >
                     <Box>
                       <img
-                        src="https://picsum.photos/200/300"
+                        src="https://admin.sensebox.com.co/uploads/planes/1/imagen_1695741617.webp"
                         alt="imagen"
                         style={{
                           width: "95px",
@@ -606,7 +640,7 @@ function CheckoutWeb() {
                     </Box>
                     <Box ml={4}>
                       <Typography>Caja sorpresa </Typography>
-                      <Typography>55.900 COP </Typography>
+                      <Typography>55.900 BS </Typography>
                     </Box>
                   </Box>
                   <Box py={3} mx={4} sx={{ borderBottom: "1px solid #000" }}>
@@ -618,7 +652,7 @@ function CheckoutWeb() {
                       }}
                     >
                       <Typography>subtotal </Typography>
-                      <Typography>{precioCaja - montoEnvio} COP </Typography>
+                      <Typography>{precioCaja - montoEnvio} BS </Typography>
                     </Box>
                     <Box
                       sx={{
@@ -671,6 +705,53 @@ function CheckoutWeb() {
               </Button>
             </Box>
           </Box>
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              <Box sx={{ width: "245px", p: 12 }}>
+                <Typography
+                  sx={{ mb: 8 }}
+                  id="modal-modal-title"
+                  variant="h6"
+                  component="h2"
+                >
+                  Ya eres parte de esta maravillosa experiencIa
+                </Typography>
+                <Typography
+                  variant="h4"
+                  id="modal-modal-description"
+                  sx={{ my: 10, color: "#B35CCA" }}
+                >
+                  TU COMPRA FUE REALIZADA CON ÉXITO
+                </Typography>
+                <Button
+                  variant="outlined"
+                  onClick={handleClose}
+                  sx={{
+                    background: "#C66CDD",
+                    color: "#fff",
+                    mt: 2,
+                    width: "290px",
+                    height: "60px",
+                    borderRadius: "32px",
+                  }}
+                >
+                  Descubre Sensebox
+                </Button>
+              </Box>
+              <Box>
+                <img
+                  src="/assets/img/gracias.png"
+                  alt="imagen"
+                  style={{ width: "100%", height: "100%" }}
+                />
+              </Box>
+            </Box>
+          </Modal>
         </Paper>
       </Box>
     </>

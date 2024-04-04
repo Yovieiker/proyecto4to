@@ -2,13 +2,13 @@ import { Box, Button, Paper, TextField, Typography } from "@mui/material";
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-function EncuestaParteWeb({  onNext , onSkip}) {
-    const handleNext = () => {
-        onNext();
-    }
-    const handleSkip = () => {
-      onSkip()
-    }
+function EncuestaParteWeb({ onNext, onSkip }) {
+  const handleNext = () => {
+    onNext();
+  };
+  const handleSkip = () => {
+    onSkip();
+  };
   return (
     <>
       <Box
@@ -18,8 +18,14 @@ function EncuestaParteWeb({  onNext , onSkip}) {
             "linear-gradient(0deg, #f0689a 0%, #f0689a 50%, #903763 100%)",
         }}
       >
-        <Paper sx={{ padding: "24px", borderRadius:"20px" }}>
-          <Box sx={{ border: "1px solid #C66CDD ", textAlign: "center", borderRadius:"20px" }}>
+        <Paper sx={{ padding: "24px", borderRadius: "20px" }}>
+          <Box
+            sx={{
+              border: "1px solid #C66CDD ",
+              textAlign: "center",
+              borderRadius: "20px",
+            }}
+          >
             <Box>
               <Typography
                 variant="h4"
@@ -54,48 +60,58 @@ function EncuestaParteWeb({  onNext , onSkip}) {
               autoComplete="off"
             >
               {/* Campos del formulario */}
-             <Box>
-             <Typography sx={{ textAlign: "center" }}>
-                ¿Cómo te gusta que te llamen?
-              </Typography>
-              <TextField id="name" label="Nombre" variant="standard"   sx={{ m: 2, width: '25ch' }}/>
-              <Typography sx={{ textAlign: "center" }}>
-                ¿Qué edad tienes?
-              </Typography>
-              <TextField id="edad" label="Edad" variant="standard" sx={{ m: 2, width: '25ch' }}/>
-              <Typography sx={{ textAlign: "center" }}>
-                ¿Cuál es tu correo?
-              </Typography>
-              <TextField id="email" label="Correo" variant="standard" sx={{ m: 2, width: '25ch' }}/>
-             </Box>
+              <Box>
+                <Typography sx={{ textAlign: "center" }}>
+                  ¿Cómo te gusta que te llamen?
+                </Typography>
+                <TextField
+                  id="name"
+                  label="Nombre"
+                  variant="standard"
+                  sx={{ m: 2, width: "25ch" }}
+                />
+              </Box>
 
               {/* Botones */}
-              <Box py={4} sx={{ display:"flex", justifyContent:"space-around" }}>
-                <Button component={NavLink} to="/" sx={{
-                    color: "#C66CDD",
-                    borderRadius: "20px",
-                  
-                    textTransform: "none",
-                  }}>
-                    Atrás
-                </Button>
-                <Button variant="outlined" color="secondary" onClick={handleSkip}
+              <Box
+                py={4}
+                sx={{ display: "flex", justifyContent: "space-around" }}
+              >
+                <Button
+                  component={NavLink}
+                  to="/"
                   sx={{
                     color: "#C66CDD",
                     borderRadius: "20px",
-                  
+
+                    textTransform: "none",
+                  }}
+                >
+                  Atrás
+                </Button>
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  onClick={handleSkip}
+                  sx={{
+                    color: "#C66CDD",
+                    borderRadius: "20px",
+
                     textTransform: "none",
                   }}
                 >
                   Saltar
                 </Button>
-                <Button onClick={handleNext} sx={{
+                <Button
+                  onClick={handleNext}
+                  sx={{
                     color: "#C66CDD",
                     borderRadius: "20px",
-                  
+
                     textTransform: "none",
-                  }}>
-                    Siguiente
+                  }}
+                >
+                  Siguiente
                 </Button>
               </Box>
             </Box>

@@ -14,7 +14,8 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import LogoutIcon from "@mui/icons-material/Logout";
 import HeadsetMicIcon from "@mui/icons-material/HeadsetMic";
 import SearchIcon from "@mui/icons-material/Search";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, Link } from "react-router-dom";
+
 function Navbar() {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
@@ -38,9 +39,15 @@ function Navbar() {
     localStorage.removeItem("token");
     localStorage.removeItem("idUser");
     localStorage.removeItem("encuestaData");
+    localStorage.removeItem("idCheckout");
     // Redirigir al usuario a la página de inicio de sesión o cualquier otra página deseada
+    window.location.reload();
+
     navigate("/");
   };
+
+  const token = localStorage.getItem("token");
+
   return (
     <>
       <AppBar position="static" sx={{ backgroundColor: "#B35CCA" }}>
@@ -93,19 +100,36 @@ function Navbar() {
           >
             <LogoutIcon fontSize="small" />
           </IconButton>
-          <Button
-            onClick={handleLogout}
-            sx={{
-              display: { xs: "none", sm: "block" },
-              width: "110px",
-              marginLeft: 1,
-              backgroundColor: "#8F559E",
-              color: "#fff",
-              borderRadius: "20px",
-            }}
-          >
-            Salir
-          </Button>
+          {token ? (
+            <Button
+              onClick={handleLogout}
+              sx={{
+                display: { xs: "none", sm: "block" },
+                width: "110px",
+                marginLeft: 1,
+                backgroundColor: "#8F559E",
+                color: "#fff",
+                borderRadius: "20px",
+              }}
+            >
+              Salir
+            </Button>
+          ) : (
+            <Button
+              component={NavLink}
+              to="/login"
+              sx={{
+                textAlign: "center",
+                display: { xs: "none", sm: "block" },
+                width: "110px",
+                backgroundColor: "#8F559E",
+                color: "#fff",
+                borderRadius: "20px",
+              }}
+            >
+              Login
+            </Button>
+          )}
           <IconButton
             sx={{
               display: { xs: "none", sm: "grid" },
